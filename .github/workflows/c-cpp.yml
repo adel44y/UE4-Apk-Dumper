@@ -2,22 +2,33 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: 
+      - "main"
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - "main"
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      # Configure the build (you can add additional configuration steps if needed)
+      - name: Configure
+        run: ./configure
+        
+      # Build the project using make
+      - name: Build
+        run: make
+        
+      # Run tests if necessary (you can customize this step)
+      - name: Run tests
+        run: make check
+        
+      # Run the distcheck (to check the distribution)
+      - name: Run distcheck
+        run: make distcheck
